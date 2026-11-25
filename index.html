@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Préstamos de Biblioteca Escolar</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <header class="encabezado">
+    <h1>Préstamos de Biblioteca Escolar</h1>
+    <p>Control de libros prestados, categorías y plazos de devolución</p>
+  </header>
+
+  <main class="contenedor">
+    <!-- Formulario de registro y edición -->
+    <section class="tarjeta">
+      <h2 id="titulo-formulario">Registrar nuevo préstamo</h2>
+      <form id="form-prestamo">
+        <input type="hidden" id="prestamo-id" />
+
+        <div class="campo">
+          <label for="titulo_libro">Título del libro</label>
+          <input type="text" id="titulo_libro" placeholder="Ej: Hijo de Hombre" required />
+        </div>
+
+        <div class="campo">
+          <label for="categoria">Categoría</label>
+          <select id="categoria" required>
+            <option value="">Seleccionar categoría...</option>
+            <option value="Literatura">Literatura</option>
+            <option value="Informática">Informática</option>
+            <option value="Historia">Historia</option>
+            <option value="Ciencias">Ciencias</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="alumno">Alumno</label>
+          <input type="text" id="alumno" placeholder="Ej: Gissel Benítez" required />
+        </div>
+
+        <div class="fila-doble">
+          <div class="campo">
+            <label for="fecha_prestamo">Fecha de préstamo</label>
+            <input type="date" id="fecha_prestamo" required />
+          </div>
+
+          <div class="campo">
+            <label for="dias_plazo">Plazo (días)</label>
+            <input type="number" id="dias_plazo" min="1" max="60" placeholder="Ej: 7" required />
+          </div>
+        </div>
+
+        <div class="botones-form">
+          <button type="submit" id="btn-guardar" class="btn-primario">Guardar préstamo</button>
+          <button type="button" id="btn-cancelar" class="btn-secundario oculto">Cancelar edición</button>
+        </div>
+      </form>
+      <p id="mensaje" class="mensaje"></p>
+    </section>
+
+    <!-- Listado y filtro -->
+    <section class="tarjeta">
+      <div class="barra-superior">
+        <h2>Libros prestados</h2>
+        <div class="filtro">
+          <label for="filtro-categoria">Filtrar:</label>
+          <select id="filtro-categoria">
+            <option value="Todas">Todas las categorías</option>
+            <option value="Literatura">Literatura</option>
+            <option value="Informática">Informática</option>
+            <option value="Historia">Historia</option>
+            <option value="Ciencias">Ciencias</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tabla-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Libro</th>
+              <th>Categoría</th>
+              <th>Alumno</th>
+              <th>Fecha</th>
+              <th>Plazo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-prestamos">
+            <tr>
+              <td colspan="6" class="centrado">Cargando préstamos...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
